@@ -24,7 +24,7 @@ public class Job {
     }
 
     public Job(String name, Employer employer, Location location, PositionType positionType, CoreCompetency coreCompetency) {
-        this ();
+        this();
         this.name = name;
         this.employer = employer;
         this.location = location;
@@ -34,13 +34,13 @@ public class Job {
 // TODO: Add custom equals and hashCode methods. Consider two Job objects "equal" when their id fields
     //  match.
 
-@Override
-public boolean equals(Object o) {
-    if (this == o) return true;
-    if (!(o instanceof Job)) return false;
-    Job job = (Job) o;
-    return getId() == job.getId();
-}
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Job)) return false;
+        Job job = (Job) o;
+        return getId() == job.getId();
+    }
 
     @Override
     public int hashCode() {
@@ -97,19 +97,23 @@ public boolean equals(Object o) {
 
     @Override
     public String toString() {
-        String nameValue = getName().isEmpty() ? "Data not available" : getName();
-        String employerValue = getEmployer().getValue().isEmpty() ? "Data not available" : getEmployer().getValue();
-        String locationValue = getLocation().getValue().isEmpty() ? "Data not available" : getLocation().getValue();
-        String positionTypeValue = getPositionType().getValue().isEmpty() ? "Data not available" : getPositionType().getValue();
-        String coreCompetencyValue = getCoreCompetency().getValue().isEmpty() ? "Data not available" : getCoreCompetency().getValue();
-        return "\nID: " + getId() +
-                "\nName: " + (getName().isEmpty() ? "Data not available" : getName()) +
-                "\nEmployer: " + (getEmployer().getValue().isEmpty() ? "Data not available" : getEmployer().getValue()) +
-                "\nLocation: " + (getLocation().getValue().isEmpty() ? "Data not available" : getLocation().getValue()) +
-                "\nPosition Type: " + (getPositionType().getValue().isEmpty() ? "Data not available" : getPositionType().getValue()) +
-                "\nCore Competency: " + (getCoreCompetency().getValue().isEmpty() ? "Data not available" : getCoreCompetency().getValue()) +
-                "\n";
+        String newLine = System.lineSeparator();
 
+        this.name = (Objects.equals(name, "")) ? "Data not available" : name;
+        String emp = (employer.getValue() == "") ? "Data not available" : employer.getValue();
+        employer.setValue(emp);
+        String loc = (location.getValue() == "") ? "Data not available" : location.getValue();
+        location.setValue(loc);
+        String pos = (positionType.getValue() == "") ? "Data not available" : positionType.getValue();
+        positionType.setValue(pos);
+
+        return newLine + "ID: " + id +
+                newLine + "Name: " + name +
+                newLine + "Employer: " + employer +
+                newLine + "Location: " + location +
+                newLine + "Position Type: " + positionType.getValue() +
+                newLine + "Core Competency: " + coreCompetency + newLine;
+
+        //return value;
     }
-
 }
